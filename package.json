@@ -1,16 +1,14 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.3.1",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "cta",
+  "version": "1.0.0",
+  "description": "Care team app prototype for the new world",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mxstbr/react-boilerplate.git"
+    "url": "git://github.com:goforward/cta.git"
   },
   "engines": {
     "npm": ">=3"
   },
-  "author": "Max Stoiber",
-  "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
@@ -245,6 +243,7 @@
     "expect-jsx": "2.6.0",
     "exports-loader": "0.6.3",
     "file-loader": "0.9.0",
+    "flow-bin": "^0.34.0",
     "html-loader": "0.4.4",
     "html-webpack-plugin": "2.24.0",
     "image-webpack-loader": "2.0.0",
