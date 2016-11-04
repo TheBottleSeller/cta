@@ -7,6 +7,7 @@ export default class WorkflowClient {
     return Async.getPromise({
       method: 'GET',
       url: `${AppConstants.WORKFLOW_API_URL}/v0/workflows`,
-    }, false, true);
+    }, false, true)
+    .done((workflows) => workflows, (error) => { throw error });
   }
 }
