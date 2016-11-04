@@ -50,4 +50,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(PatientBaseballCard);
+export default connect(selectPatientBaseballCard(), mapDispatchToProps)(PatientBaseballCard);

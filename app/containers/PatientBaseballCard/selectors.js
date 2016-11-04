@@ -30,7 +30,7 @@ const selectPatientBaseballCard = () => createSelector(
   selectPatientBaseballCardDomain(),
   getPatientChart,
   (substate, chart) => {
-    const state = substate.toJS();
+    var state = substate.toJS();
     state.chart = chart;
     return state;
   }

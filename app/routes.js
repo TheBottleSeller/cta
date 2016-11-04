@@ -25,14 +25,16 @@ export default function createRoutes(store) {
           System.import('containers/Workflow/reducer'),
           System.import('containers/Workflow/sagas'),
           System.import('containers/Workflow'),
+          System.import('containers/PatientBaseballCard/reducer'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, sagas, component, patientBaseballCardReducer]) => {
           injectReducer('workflow', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
+          injectReducer('patientBaseballCard', patientBaseballCardReducer.default);
         });
 
         importModules.catch(errorLoading);
