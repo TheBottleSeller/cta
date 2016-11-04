@@ -13,6 +13,11 @@ import { Link } from 'react-router';
 
 export class PatientBaseballCard extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    if (!this.props.chart) {
+      return (
+        <div>Loading Baseball</div>
+      )
+    }
     return (
       <div>
         <Helmet
