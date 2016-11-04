@@ -19,60 +19,67 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/HomePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([component]) => {
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
-      path: 'workflows/:workflowId',
-      name: 'workflow',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/Workflow/reducer'),
-          System.import('containers/Workflow/sagas'),
-          System.import('containers/Workflow'),
+          System.import('containers/Index/reducer'),
+          System.import('containers/Index/sagas'),
+          System.import('containers/Index'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('workflow', reducer.default);
+          injectReducer('index', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });
 
         importModules.catch(errorLoading);
       },
-    }, {
-      path: '/charts/:chartId',
-      name: 'chart',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/Chart/reducer'),
-          System.import('containers/Chart/sagas'),
-          System.import('containers/Chart'),
-        ]);
+      childRoutes: [
+        {
+          path: '/workflows/:workflowId',
+          name: 'workflow',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/Workflow/reducer'),
+              System.import('containers/Workflow/sagas'),
+              System.import('containers/Workflow'),
+            ]);
 
-        const renderRoute = loadModule(cb);
+            const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('chart', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('workflow', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
 
-        importModules.catch(errorLoading);
-      },
+            importModules.catch(errorLoading);
+          },
+        }, {
+          path: '/charts/:chartId',
+          name: 'chart',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/Chart/reducer'),
+              System.import('containers/Chart/sagas'),
+              System.import('containers/Chart'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('chart', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
+      ],
     }, {
       path: '*',
       name: 'notfound',
