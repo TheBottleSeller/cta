@@ -9,7 +9,6 @@ const selectWorkflowDomain = () => (state) => state.get('workflow');
  * Other specific selectors
  */
 
-
 /**
  * Default selector used by Workflow
  */

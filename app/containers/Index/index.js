@@ -9,15 +9,21 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectIndex from './selectors';
 import NavBar from '../../components/NavBar/index';
+import AppConstants from '../../constants/AppConstants';
 import {
-  listWorkflowsRequested,
-} from './actions';
+  LIST_WORKFLOWS_REQUESTED,
+  CHECKOUT_REQUESTED,
+} from './constants';
 
 export class Index extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     console.log('hello');
     setTimeout(() => {
-      this.props.dispatch(listWorkflowsRequested())
+      this.props.dispatch({ type: LIST_WORKFLOWS_REQUESTED })
+    }, 0);
+    // This gives us the current state of the patient profile.
+    setTimeout(() => {
+      this.props.dispatch({ type: CHECKOUT_REQUESTED, repoId: AppConstants.PATIENT_ID })
     }, 0);
   }
 
@@ -35,6 +41,10 @@ export class Index extends React.Component { // eslint-disable-line react/prefer
       </div>
     );
   }
+}
+
+Index.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = selectIndex();

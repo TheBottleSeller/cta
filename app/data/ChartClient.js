@@ -12,7 +12,7 @@ export default class ChartClient {
     console.log('do request');
     return Async.getPromise({
       method: 'POST',
-      url: `${AppConstants.CHART_API_URL}/v0/chart`,
+      url: `${AppConstants.CHART_API_URL}/v0/checkout`,
       body: JSON.stringify(body),
     }, false, true)
     .done((checkoutResponse) => checkoutResponse.chart, (error) => { throw error });
@@ -27,10 +27,13 @@ export default class ChartClient {
     }
     console.log('do request');
     return Async.getPromise({
-      method: 'POST',
-      url: `${AppConstants.CHART_API_URL}/v0/chart`,
+      method: 'GET',
+      url: `${AppConstants.CHART_API_URL}/v0/log`,
       qs: params,
     }, false, true)
-    .done((logResponse) => logResponse.changes, (error) => { throw error });
+    .then((logResponse) => {
+      console.log('This is the log response: ' + logResponse);
+      return logResponse.changes;
+    }, (error) => { throw error });
   }
 }

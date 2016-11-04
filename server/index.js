@@ -38,9 +38,13 @@ app.use('/api/workflow', bodyParser.json(), function(req, res) {
     if (error) {
       res.status(500).send(error).end();
     } else {
-      let bodyJSON = JSON.parse(body);
-      bodyJSON.statusCode = response.statusCode;
-      res.status(response.statusCode).send(bodyJSON).end();
+      try {
+        let bodyJSON = JSON.parse(body);
+        bodyJSON.statusCode = response.statusCode;
+        res.status(response.statusCode).send(bodyJSON).end();
+      } catch(e) {
+        res.status(500).send(e.message).end();
+      }
     }
   });
 });
@@ -52,9 +56,13 @@ app.use('/api/chart', bodyParser.json(), function(req, res) {
     if (error) {
       res.status(500).send(error).end();
     } else {
-      let bodyJSON = JSON.parse(body);
-      bodyJSON.statusCode = response.statusCode;
-      res.status(response.statusCode).send(bodyJSON).end();
+      try {
+        let bodyJSON = JSON.parse(body);
+        bodyJSON.statusCode = response.statusCode;
+        res.status(response.statusCode).send(bodyJSON).end();
+      } catch (e) {
+        res.status(500).send(e.message).end();
+      }
     }
   });
 });
