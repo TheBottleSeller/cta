@@ -19,7 +19,7 @@ export class PatientBaseballCard extends React.Component { // eslint-disable-lin
       )
     }
     return (
-      <div>
+      <div className="patient-baseball-card-container">
         <Helmet
           title="PatientBaseballCard"
           meta={[

@@ -34,6 +34,7 @@ module.exports = {
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
         loader: 'null-loader',
       },
+      { test: /\.s?css$/, loader: 'null-loader' },
     ],
   },
 
