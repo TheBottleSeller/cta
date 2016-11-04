@@ -39,7 +39,7 @@ app.use('/api/workflow', bodyParser.json(), function(req, res) {
       res.status(500).send(error).end();
     } else {
       try {
-        let bodyJSON = JSON.parse(body);
+        var bodyJSON = JSON.parse(body);
         bodyJSON.statusCode = response.statusCode;
         res.status(response.statusCode).send(bodyJSON).end();
       } catch(e) {
@@ -57,7 +57,7 @@ app.use('/api/chart', bodyParser.json(), function(req, res) {
       res.status(500).send(error).end();
     } else {
       try {
-        let bodyJSON = JSON.parse(body);
+        var bodyJSON = JSON.parse(body);
         bodyJSON.statusCode = response.statusCode;
         res.status(response.statusCode).send(bodyJSON).end();
       } catch (e) {

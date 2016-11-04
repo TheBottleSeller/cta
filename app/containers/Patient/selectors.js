@@ -1,5 +1,7 @@
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import { selectWorkflows } from '../App/selectors';
+import lodash from 'lodash';
 
 /**
  * Direct selector to the patient state domain
@@ -28,9 +30,13 @@ const getPatientChartFromRoute = (state, props) => {
 const selectPatient = () => createSelector(
   selectPatientDomain(),
   getPatientChartFromRoute,
-  (substate, chart) => {
+  selectWorkflows(),
+  (substate, chart, allWorkflows) => {
     var state = substate.toJS();
     state.chart = chart;
+    // TODO: Filter by workflows
+    var workflowsJS = lodash.values(allWorkflows.toJS());
+    state.workflows = fromJS(workflowsJS);
     return state;
   }
 );

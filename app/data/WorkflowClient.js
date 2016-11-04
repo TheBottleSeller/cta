@@ -8,6 +8,6 @@ export default class WorkflowClient {
       method: 'GET',
       url: `${AppConstants.WORKFLOW_API_URL}/v0/workflows`,
     }, false, true)
-    .done((listResponse) => listResponse.workflows, (error) => { throw error });
+    .then((listResponse) => listResponse.workflows, (error) => { throw error });
   }
 }

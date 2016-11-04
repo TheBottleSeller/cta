@@ -15,7 +15,7 @@ export default class ChartClient {
       url: `${AppConstants.CHART_API_URL}/v0/checkout`,
       body: JSON.stringify(body),
     }, false, true)
-    .done((checkoutResponse) => checkoutResponse.chart, (error) => { throw error });
+    .then((checkoutResponse) => checkoutResponse.chart, (error) => { throw error });
   }
 
   static log(repoId : string, count : ?string) {

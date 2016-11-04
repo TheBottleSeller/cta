@@ -21,7 +21,7 @@ import {
 export class Workflow extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    console.log('mounted workflow');
+    console.log('mounted workflow, doing full data refresh');
     setTimeout(() => {
       this.props.dispatch({ type: LIST_WORKFLOWS_REQUESTED })
     }, 0);
