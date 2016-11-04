@@ -3,10 +3,10 @@ import {
   LIST_WORKFLOWS_REQUESTED,
   LIST_WORKFLOWS_SUCCESS,
   LIST_WORKFLOWS_FAILURE,
-  WORKFLOWS,
 } from './constants';
 
 import { take, call, put, select } from 'redux-saga/effects';
+import WorkflowClient from '../../data/WorkflowClient';
 
 // Individual exports for testing
 export function* defaultSaga() {
@@ -15,10 +15,10 @@ export function* defaultSaga() {
 
 function* listWorkflows() {
   try {
-    // const workflows = yield call(WorkflowClient.listWorkflows);
-    yield put({type: LIST_WORKFLOWS_SUCCESS, workflows: WORKFLOWS});
+    const workflows = yield call(WorkflowClient.listWorkflows);
+    yield put({ type: LIST_WORKFLOWS_SUCCESS, workflows });
   } catch (e) {
-    yield put({type: LIST_WORKFLOWS_FAILURE, message: e.message});
+    yield put({ type: LIST_WORKFLOWS_FAILURE, message: e.message });
   }
 }
 
