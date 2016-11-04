@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectPatientBaseballCard from './selectors';
 import { getPatientChart } from './selectors';
+import { Link } from 'react-router';
 
 export class PatientBaseballCard extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -20,7 +21,10 @@ export class PatientBaseballCard extends React.Component { // eslint-disable-lin
             { name: 'description', content: 'Description of PatientBaseballCard' },
           ]}
         />
-        Patient Name: {this.props.chart.get('profile').get('full_name')}
+        Patient Card
+        <div>
+          Full Name:<Link to={`/patients/${this.props.patientId}`}>{this.props.chart.get('profile').get('full_name')}</Link>
+        </div>
       </div>
     );
   }
@@ -29,6 +33,7 @@ export class PatientBaseballCard extends React.Component { // eslint-disable-lin
 PatientBaseballCard.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   chart: React.PropTypes.object,
+  patientId: React.PropTypes.string,
 };
 
 

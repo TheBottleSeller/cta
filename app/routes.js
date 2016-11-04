@@ -17,7 +17,24 @@ export default function createRoutes(store) {
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
+
     {
+      path: '/',
+      name: 'home',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/HomePage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '/workflows/:workflowId',
       name: 'workflow',
       getComponent(nextState, cb) {
@@ -53,6 +70,26 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('chart', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/patients/:patientId',
+      name: 'patient',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Patient/reducer'),
+          System.import('containers/Patient/sagas'),
+          System.import('containers/Patient'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('patient', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

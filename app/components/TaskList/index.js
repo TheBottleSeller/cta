@@ -11,13 +11,16 @@ import lodash from 'lodash';
 class TaskList extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     console.log(`these are the tasks ${this.props.tasks}`)
-    const tasks = this.props.tasks.map((task, index) => {
-      return (
-        <li key={index}>
-          <input type="checkbox" /> {task.get('description')} - @{task.get('owner_name')}
-        </li>
-      )
-    });
+    let tasks;
+    if (this.props.tasks) {
+      tasks = this.props.tasks.map((task, index) => {
+        return (
+          <li key={index}>
+            <input type="checkbox" /> {task.get('description')} - @{task.get('owner_name')}
+          </li>
+        )
+      });
+    }
     return (
       <div>
         TaskList
