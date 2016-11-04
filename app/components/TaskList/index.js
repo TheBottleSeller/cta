@@ -5,20 +5,24 @@
 */
 
 import React from 'react';
+import lodash from 'lodash';
 
 
 class TaskList extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    console.log(`these are the tasks ${this.props.tasks}`)
+    const tasks = this.props.tasks.map((task, index) => {
+      return (
+        <li key={index}>
+          <input type="checkbox" /> {task.get('description')} - @{task.get('owner_name')}
+        </li>
+      )
+    });
     return (
       <div>
         TaskList
         <ul>
-          <li>
-            <input type="checkbox" /> Greet Patient
-          </li>
-          <li>
-            <input type="checkbox" /> Edit notes
-          </li>
+          {tasks}
         </ul>
       </div>
     );
@@ -27,6 +31,7 @@ class TaskList extends React.Component { // eslint-disable-line react/prefer-sta
 
 TaskList.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  tasks: React.PropTypes.object,
 };
 
 export default TaskList;

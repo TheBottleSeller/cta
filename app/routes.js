@@ -18,68 +18,45 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/',
-      name: 'index',
+      path: '/workflows/:workflowId',
+      name: 'workflow',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/Index/reducer'),
-          System.import('containers/Index/sagas'),
-          System.import('containers/Index'),
+          System.import('containers/Workflow/reducer'),
+          System.import('containers/Workflow/sagas'),
+          System.import('containers/Workflow'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('index', reducer.default);
+          injectReducer('workflow', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });
 
         importModules.catch(errorLoading);
       },
-      childRoutes: [
-        {
-          path: '/workflows/:workflowId',
-          name: 'workflow',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/Workflow/reducer'),
-              System.import('containers/Workflow/sagas'),
-              System.import('containers/Workflow'),
-            ]);
+    }, {
+      path: '/charts/:chartId',
+      name: 'chart',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Chart/reducer'),
+          System.import('containers/Chart/sagas'),
+          System.import('containers/Chart'),
+        ]);
 
-            const renderRoute = loadModule(cb);
+        const renderRoute = loadModule(cb);
 
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('workflow', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('chart', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
 
-            importModules.catch(errorLoading);
-          },
-        }, {
-          path: '/charts/:chartId',
-          name: 'chart',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/Chart/reducer'),
-              System.import('containers/Chart/sagas'),
-              System.import('containers/Chart'),
-            ]);
-
-            const renderRoute = loadModule(cb);
-
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('chart', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
-
-            importModules.catch(errorLoading);
-          },
-        },
-      ],
+        importModules.catch(errorLoading);
+      },
     }, {
       path: '*',
       name: 'notfound',

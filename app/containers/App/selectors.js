@@ -1,3 +1,17 @@
+import { createSelector } from 'reselect';
+
+const selectGlobal = () => (state) => state.get('global');
+
+const selectWorkflows = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('workflows')
+);
+
+const selectPatients = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('patients')
+);
+
 // selectLocationState expects a plain JS object for the routing state
 const selectLocationState = () => {
   let prevRoutingState;
@@ -17,4 +31,7 @@ const selectLocationState = () => {
 
 export {
   selectLocationState,
+  selectGlobal,
+  selectWorkflows,
+  selectPatients,
 };
