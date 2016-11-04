@@ -46,6 +46,12 @@ module.exports = (options) => ({
       loader: 'url-loader?limit=10000',
     }],
   },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
       // make fetch available
